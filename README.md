@@ -21,6 +21,18 @@ It aims to solve common developer pain points by providing specific actions like
 - macOS 14.0+
 - Xcode installed (Command Line Tools required for `xcrun`)
 
+## macOS App Sandbox
+
+SimAction executes Apple developer tools such as `xcrun simctl` to interact with simulators. These tools cannot be executed from within a sandboxed macOS application. For SimAction to function correctly, the App Sandbox must be disabled.
+
+### Steps to Disable App Sandbox
+1. Open the project in Xcode.
+2. Select the `SimAction.entitlements` file in the project navigator.
+3. Change the **App Sandbox** property to **NO**.
+
+### Rationale
+SimAction is a developer utility that relies on official Apple tooling to provide its core functionality. Requiring the App Sandbox to be disabled is a common and expected setup for developer tools that interact with system-level services or other developer utilities. The application does not require elevated privileges beyond the ability to execute these standard developer commands.
+
 ## Build & Run
 
 1. Open `SimAction.xcodeproj` in Xcode.
