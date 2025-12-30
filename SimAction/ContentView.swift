@@ -1,21 +1,22 @@
-//
-//  ContentView.swift
-//  SimAction
-//
-//  Created by Nesim Tunç on 2025/12/30.
-//
-
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var viewModel = DeviceListViewModel()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        HSplitView {
+            SidebarView(viewModel: viewModel)
+                .frame(minWidth: 250, maxWidth: 400)
+            
+            VSplitView {
+                ActionPanelView(viewModel: viewModel)
+                    .frame(minWidth: 300, minHeight: 300)
+                
+                LogPanelView(viewModel: viewModel)
+                    .frame(minHeight: 100)
+            }
         }
-        .padding()
+        .frame(minWidth: 600, minHeight: 400)
     }
 }
 
