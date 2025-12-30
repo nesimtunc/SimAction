@@ -12,7 +12,7 @@ struct SidebarView: View {
             }
             .pickerStyle(.segmented)
             .padding()
-            .onChange(of: viewModel.selectedTab) { _ in
+            .onChange(of: viewModel.selectedTab) {
                 viewModel.filterDevices()
             }
             

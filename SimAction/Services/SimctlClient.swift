@@ -105,7 +105,7 @@ class SimctlClient {
         
         if let data = text.data(using: .utf8) {
             try pipeIn.fileHandleForWriting.write(contentsOf: data)
-            try pipeIn.fileHandleForWriting.closeFile()
+            try pipeIn.fileHandleForWriting.close()
         }
         
         task.waitUntilExit()
