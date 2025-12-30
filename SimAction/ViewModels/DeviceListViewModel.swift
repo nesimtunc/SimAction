@@ -38,10 +38,6 @@ class DeviceListViewModel: ObservableObject {
         // Load persistence
         self.recentURLs = UserDefaults.standard.stringArray(forKey: "recentURLs") ?? []
         self.lastClipboardText = UserDefaults.standard.string(forKey: "lastClipboardText") ?? ""
-        
-        Task {
-            await refreshDevices()
-        }
     }
     
     func refreshDevices() async {

@@ -13,10 +13,20 @@ struct SidebarView: View {
             .pickerStyle(.segmented)
             .padding()
             .onChange(of: viewModel.selectedTab) {
-                viewModel.filterDevices()
+                DispatchQueue.main.async {
+                    viewModel.filterDevices()
+                }
             }
             
-            List(selection: $viewModel.selectedDeviceIds) {
+            
+            List(selection: Binding(
+                get: { viewModel.selectedDeviceIds },
+                set: { newSelection in
+                    DispatchQueue.main.async {
+                        viewModel.selectedDeviceIds = newSelection
+                    }
+                }
+            )) {
                 if viewModel.isLoading {
                     ProgressView()
                 } else if viewModel.devices.isEmpty {

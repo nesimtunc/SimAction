@@ -17,6 +17,9 @@ struct ContentView: View {
             }
         }
         .frame(minWidth: 600, minHeight: 400)
+        .task {
+            await viewModel.refreshDevices()
+        }
     }
 }
 
