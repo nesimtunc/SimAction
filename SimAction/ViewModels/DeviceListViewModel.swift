@@ -158,10 +158,12 @@ class DeviceListViewModel: ObservableObject {
              let timestamp = DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .medium)
                 .replacingOccurrences(of: "/", with: "")
                 .replacingOccurrences(of: ":", with: "")
+                .replacingOccurrences(of: ",", with: "")
                 .replacingOccurrences(of: " ", with: "_")
             
             let filename = "SimAction_\(device.name)_\(device.osVersion)_\(timestamp).png"
                 .replacingOccurrences(of: " ", with: "_")
+                .replacingOccurrences(of: ",", with: "")
             
             let path = outputFolder.appendingPathComponent(filename).path
             
