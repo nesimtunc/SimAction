@@ -3,6 +3,7 @@ import SwiftUI
 import Combine
 
 enum DeviceTab: String, CaseIterable, Identifiable {
+    case booted = "Booted"
     case all = "All"
     case simulators = "Simulators"
     case devices = "Devices"
@@ -13,7 +14,7 @@ enum DeviceTab: String, CaseIterable, Identifiable {
 @MainActor
 class DeviceListViewModel: ObservableObject {
     @Published var devices: [DeviceItem] = []
-    @Published var selectedTab: DeviceTab = .all
+    @Published var selectedTab: DeviceTab = .booted
     @Published var selectedDeviceIds: Set<String> = []
     @Published var logs: [String] = []
     
@@ -79,6 +80,8 @@ class DeviceListViewModel: ObservableObject {
             devices = sorted.filter { $0.source == .simulator }
         case .devices:
             devices = sorted.filter { $0.source == .physicalDevice }
+        case .booted:
+            devices = sorted.filter { $0.isBooted || $0.state == .connected }
         }
     }
     
